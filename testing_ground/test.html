@@ -1,0 +1,390 @@
+<canvas id="gc" width=640 height=640></canvas>
+<img id="tocchan" src="tocchan_cubic.png" style="width:auto; height:250px;display:none">
+<img id="marbles" src="marbles100px.jpg" style="width:auto; height:250px;display:none">
+<img id="beam" src="beam100px.png" style="width:auto; height:250px;display:none">
+<img id="pendant" src="pendant100px.jpg" style="width:auto; height:250px;display:none">
+<img id="seal" src="sealofcommand100px.png" style="width:auto; height:250px;display:none">
+<img id="ubw" src="ubw100px.jpg" style="width:auto; height:250px;display:none">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.3/js.cookie.min.js"></script>
+<script>
+/*
+name - addition - cost
+a - 1pt - 50 - marbles100px.jpg
+b - 2pt - 500 - beam100px.png
+c - 5pt - 1000 - pendant100px.jpg
+d - 20pt - 2000 - sealofcommand100px.png
+e - 100pt - 10000 - ubw100px.jpg
+*/
+a = 1;
+b = 0;
+c = 0;
+d = 0;
+f = 0;
+score = 0;
+current_tooltip = 0;
+rotation_velocity = 0;
+TO_RADIANS = Math.PI/180;
+change_log = false;
+changes = new Array("Known issues:", "- too easy to cheat");
+
+/*
+fireworks
+
+flyingShits = new Array();
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+var FlyingShit = new function(){
+    this.x = getRandomInt(10, 630);
+    this.y = 0;
+    this.r = getRandomInt(3, 15);
+    this.updateFall = function(){
+        if (y <= 480){
+            this.y += 3;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
+*/
+function checkClickOnRectangle(x, y, w, h, e, f){
+    if (e.clientX > x && e.clientX < x+w){
+        if (e.clientY > y && e.clientY < y+h){
+            f();
+        }
+    }
+}
+function clickEventFunction(e){
+
+    //check clicks
+/*
+    drawButton(0, 0, 100, 100);
+    drawButton(0, 100, 100, 100);
+    drawButton(0, 200, 100, 100);
+    drawButton(0, 300, 100, 100);
+    drawButton(0, 400, 100, 100);
+*/
+    /*
+    name - addition - cost
+    a - 1pt - 50
+    b - 2pt - 500
+    c - 5pt - 1000
+    d - 20pt - 2000
+    e - 100pt - 10000
+    */
+    //save drawButton(0, gamecanvas.height, 4*7, -16);
+    checkClickOnRectangle(0, gamecanvas.height-16, 4*7, gamecanvas.height, e, function(){
+        saveGame();
+    });
+    //a
+    checkClickOnRectangle(0, 0, 100, 100, e, function(){
+        if (score >=50){
+            score -= 50;
+            a += 1;
+        }
+    });
+    //b
+    checkClickOnRectangle(0, 100, 100, 100, e, function(){
+        if (score >=500){
+            score -= 500;
+            b += 1;
+        }
+    });
+    //c
+    checkClickOnRectangle(0, 200, 100, 100, e, function(){
+        if (score >=1000){
+            score -= 1000;
+            c += 1;
+        }
+    });
+    //d
+    checkClickOnRectangle(0, 300, 100, 100, e, function(){
+        if (score >=2000){
+            score -= 2000;
+            d += 1;
+        }
+    });
+    //e
+    checkClickOnRectangle(0, 400, 100, 100, e, function(){
+        if (score >=10000){
+            score -= 10000;
+            f += 1;
+            console.log(f);
+        }
+    });
+
+
+    checkClickOnRectangle(200, 200, gamecanvas.width, gamecanvas.height, e, function(){
+        score += 1;
+        rotation_velocity += 0.01;
+    });
+
+    checkClickOnRectangle(gamecanvas.width-(16*9), gamecanvas.height-2, 16*9, 8, e, function(){
+            if (change_log == false){
+                change_log = true;
+            }
+            else{
+                change_log = false;
+            }
+    });
+
+    
+}
+
+String.prototype.formatUnicorn = String.prototype.formatUnicorn ||
+function () {
+    "use strict";
+    var str = this.toString();
+    if (arguments.length) {
+        var t = typeof arguments[0];
+        var key;
+        var args = ("string" === t || "number" === t) ?
+            Array.prototype.slice.call(arguments)
+            : arguments[0];
+
+        for (key in args) {
+            str = str.replace(new RegExp("\\{" + key + "\\}", "gi"), args[key]);
+        }
+    }
+
+    return str;
+};
+
+function saveGame(){
+    ba = btoa(a);
+    bb = btoa(b);
+    bc = btoa(c);
+    bd = btoa(d);
+    bf = btoa(f);
+    brotational_velocity = btoa(rotation_velocity);
+    bscore = btoa(score);
+    combined = ba+","+bb+","+bc+","+bd+","+bf+","+brotational_velocity+","+bscore;
+    Cookies.set("save", combined, {expires: 200, path: ""});
+    console.log("Saved!");
+}
+
+function loadGame(){
+    myCookie = Cookies.get("save");
+    console.log(myCookie);
+    if (typeof myCookie == 'undefined'){
+        return false;    
+    }
+    else{
+        myCookie = myCookie.split(",");
+        for (i=0; i <= myCookie.length-1; i++){
+            console.log(i);
+            switch(i){
+                case 0:
+                    a = parseInt(atob(myCookie[i]));
+                    break;
+                case 1:
+                    b = parseInt(atob(myCookie[i]));
+                    break;
+                case 2:
+                    c = parseInt(atob(myCookie[i]));
+                    break;
+                case 3:
+                    d = parseInt(atob(myCookie[i]));
+                    break;
+                case 4:
+                    f = parseInt(atob(myCookie[i]));
+                    break;
+                case 5:
+                    rotation_velocity = parseFloat(atob(myCookie[i]));
+                    break;
+                case 6:
+                    score = parseInt(atob(myCookie[i]));
+            }
+        }
+        console.log("goodload");
+    }
+}
+
+window.onload=function(){
+    gamecanvas = document.getElementById("gc");
+    gamecontext = gamecanvas.getContext("2d");
+    loadGame();
+    setInterval(update, 1000/30);
+    setInterval(saveGame, 30*1000);
+    tocchan = document.getElementById("tocchan");
+    marbles = document.getElementById("marbles");
+    beam = document.getElementById("beam");
+    pendant = document.getElementById("pendant");
+    seal = document.getElementById("seal");
+    ubw = document.getElementById("ubw");
+    gamecanvas.addEventListener("click", clickEventFunction);
+    function drawTooltips(e){
+        x = e.clientX;
+        y = e.clientY;
+        //console.log("bah");
+        if (mouseOverRectangle(0, 0, 100, 100, e)){
+           current_tooltip = 1;
+        }
+        else if (mouseOverRectangle(0, 100, 100, 100, e)){
+           current_tooltip = 2;
+        }
+        else if (mouseOverRectangle(0, 200, 100, 100, e)){
+           current_tooltip = 3;
+        }
+        else if (mouseOverRectangle(0, 300, 100, 100, e)){
+            current_tooltip = 4;  
+        }
+        else if (mouseOverRectangle(0, 400, 100, 100, e)){
+            current_tooltip = 5; 
+        }
+        else{
+            current_tooltip = 0;
+        }
+    }
+    gamecanvas.addEventListener("mousemove", drawTooltips);
+
+}
+function drawButton(x, y, w, h){
+    gamecontext.fillRect(x, y, w, h);
+}
+function mouseOverRectangle(x, y, w, h, e){
+    //console.log("mouseover begin");
+    if (e.clientX > x && e.clientX < w+x){
+        if (e.clientY > y && e.clientY < h+y){
+            //console.log("true");
+            return true;
+        }
+        return false;
+    }
+    //console.log("false");
+    return false;
+}
+function calculatePerSecondScore(){
+    return (a*1)+(b*2)+(c*5)+(d*20)+(f*100);
+}
+function gameLogic(){
+    score += calculatePerSecondScore()/(1000/30);
+}
+function update(){
+    //#190C03 bg color
+    //#401A00 buttons color
+    //#D36743 font color
+    gamecontext.fillStyle = "#190C03";
+    gamecontext.fillRect(0,0,gamecanvas.width, gamecanvas.height);
+    gamecontext.fillStyle="white";
+    gamecontext.font = "8px Verdana";
+    gamecontext.fillText("130216alpha2 Rey", gamecanvas.width-(16*9), gamecanvas.height-2);
+    gamecontext.font = "12px Verdana";
+    gamecontext.fillStyle = "#401A00";
+    //buttons
+    drawButton(0, 0, 100, 100);
+    drawButton(0, 100, 100, 100);
+    drawButton(0, 200, 100, 100);
+    drawButton(0, 300, 100, 100);
+    drawButton(0, 400, 100, 100);
+    
+    //draw icons for buttons, half opacity
+    /*
+    marbles = document.getElementById("marbles");
+    beam = document.getElementById("beam");
+    pendant = document.getElementById("pendant");
+    seal = document.getElementById("seal");
+    ubw = document.getElementById("ubw");
+    */
+    gamecontext.globalAlpha = 0.5;
+    gamecontext.drawImage(marbles, 0, 0);
+    gamecontext.drawImage(beam, 0, 100);
+    gamecontext.drawImage(pendant, 0, 200);
+    gamecontext.drawImage(seal, 0, 300);
+    gamecontext.drawImage(ubw, 0, 400);
+    gamecontext.globalAlpha = 1;
+    
+    gamecontext.fillStyle = "#D36743";
+    gamecontext.fillText(Math.floor(score), gamecanvas.width/2, 10);
+    gamecontext.fillStyle = "green";
+    gamecontext.fillText("+("+calculatePerSecondScore()+")points per second", gamecanvas.width/2, 26);
+    gamecontext.fillStyle = "red";
+    gamecontext.fillText("+("+((rotation_velocity*(180/Math.PI))/360)+")Rins", gamecanvas.width/2, 26+16);
+    gamecontext.fillStyle="#190C03";
+    
+    //draw rotating tocchan
+    gamecontext.save();
+    gamecontext.translate(250, 250);
+    gamecontext.translate(tocchan.width/2, tocchan.height/2);
+    rotation_velocity += calculatePerSecondScore()/1000;
+    gamecontext.rotate(rotation_velocity);
+    gamecontext.drawImage(tocchan, -(tocchan.width/2), -(tocchan.height/2));
+    gamecontext.restore();
+
+    //button titles
+    gamecontext.fillStyle = "#401A00";
+    drawButton(0, 100, 100, -16);
+    drawButton(0, 200, 100, -16);
+    drawButton(0, 300, 100, -16);
+    drawButton(0, 400, 100, -16);
+    drawButton(0, 500, 100, -16);
+    gamecontext.fillStyle = "#D36743";
+    gamecontext.fillText(a, 0, 100-3);
+    gamecontext.fillText(b, 0, 200-3);
+    gamecontext.fillText(c, 0, 300-3);
+    gamecontext.fillText(d, 0, 400-3);
+    gamecontext.fillText(f, 0, 500-3);
+    //save button
+    gamecontext.fillStyle = "#401A00";
+    drawButton(0, gamecanvas.height, 4*7, -16);
+    gamecontext.fillStyle = "#D36743";
+    gamecontext.fillText("save", 0, gamecanvas.height-3);
+    /*
+    name - addition - cost
+    a - 1pt - 50
+    b - 2pt - 500
+    c - 5pt - 1000
+    d - 20pt - 2000
+    f - 100pt - 10000
+    */
+    gamecontext.fillStyle = "black";
+    switch (current_tooltip){
+        case 0:
+            break;
+        case 1:
+           gamecontext.fillStyle = "grey";
+           drawButton(x, y-12, 9*12, 18);
+           gamecontext.fillStyle = "black";
+           gamecontext.fillText("Cost: 50, PPS: +1", x, y);
+           break;
+        case 2:
+           gamecontext.fillStyle = "grey";
+           drawButton(x, y-12, 9*13, 18);
+           gamecontext.fillStyle = "black";
+           gamecontext.fillText("Cost: 500, PPS: +2", x, y);
+           break;
+        case 3:
+           gamecontext.fillStyle = "grey";
+           drawButton(x, y-12, 9*14, 18);
+           gamecontext.fillStyle = "black";
+           gamecontext.fillText("Cost: 1000, PPS: +5", x, y);
+           break;
+        case 4:
+           gamecontext.fillStyle = "grey";
+           drawButton(x, y-12, 9*15, 18);
+           gamecontext.fillStyle = "black";
+           gamecontext.fillText("Cost: 2000, PPS: +20", x, y);
+           break;
+        case 5:
+           gamecontext.fillStyle = "grey";
+           drawButton(x, y-12, 9*17, 18);
+           gamecontext.fillStyle = "black";
+           gamecontext.fillText("Cost: 10000, PPS: +100", x, y);
+           break;
+    }
+    if (change_log == true){
+        gamecontext.fillRect(50, 50, gamecanvas.width-50, gamecanvas.height-50);
+        gamecontext.fillStyle = "grey";
+        for(i = 0; i <= changes.length-1; i++){
+            gamecontext.fillText(changes[i], 100, 100+(i*16));        
+        }
+        gamecontext.fillStyle = "red";
+        gamecontext.fillText("exit", gamecanvas.width-((16*9)/2), gamecanvas.height-2);
+    }
+    gameLogic();
+}
+</script>

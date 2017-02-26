@@ -1,0 +1,208 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700);
+html{
+  height: 100%;
+  background: #fff;
+  background: linear-gradient(#333333, #141414);
+  background-attachment:fixed;
+}
+
+.simplediv{
+  font-family: Veranda, Arial;
+  font-size: 14px;
+  background: #fff;
+  width: 500px;
+  border: solid #9C9C9C 2px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1%;
+  -webkit-box-shadow: 0px 0px 8px 0px rgba(255, 255, 255, 0.65);
+  -moz-box-shadow:    0px 0px 8px 0px rgba(255, 255, 255, 0.65);
+  box-shadow:         0px 0px 8px 0px rgba(255, 255, 255, 0.65);
+}
+
+.tuturu{
+	text-align: center;
+	background: #fff;
+}
+
+.tuturu2{
+  font-family: Veranda, Arial;
+  font-size: 14px;
+  background: #fff;
+  width: 500px;
+  border: solid #9C9C9C 2px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1%;
+  -webkit-box-shadow: 0px 0px 8px 0px rgba(255, 255, 255, 0.65);
+  -moz-box-shadow:    0px 0px 8px 0px rgba(255, 255, 255, 0.65);
+  box-shadow:         0px 0px 8px 0px rgba(255, 255, 255, 0.65);
+	width: 190px;
+	height: 125px;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	-webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.65);
+	-moz-box-shadow:    0px 0px 8px 0px rgba(0, 0, 0, 0.65);
+	box-shadow:         0px 0px 8px 0px rgba(0, 0, 0, 0.65);
+}
+
+.mayushii{
+	position:absolute;
+	right:0px;
+	bottom: 0px;
+}
+
+.mascot{
+	position:absolute;
+	right:0px;
+	bottom: 0px;
+	filter: grayscale(0.80);
+	transition-property: filter;
+	opacity: 0.50;
+}
+
+.hl{
+	color: #000;
+	background: #fff;
+}
+
+.menucenter{
+  font-family: Veranda, Arial;
+  font-size: 14px;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 200px;
+  height: 240px;
+  -webkit-box-shadow: 0px 10px 23px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow:    0px 10px 23px 0px rgba(0, 0, 0, 0.2);
+  box-shadow:         0px 10px 23px 0px rgba(0, 0, 0, 0.2);
+}
+
+#guestbook{
+  height: 275px;
+  font-size: 12px;
+}
+
+#logs{
+  width: 95%;
+  background: #000;
+  color: #fff;
+  font-family: meiryo;
+  white-space: -moz-pre-wrap;
+  word-wrap: break-word;
+}
+
+#contact{
+	background-image: url("http://waa.ai/vkbn");
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#contactbox{
+	margin-rigt: 80%;
+	margin-left: 10%;
+	margin-top: 6%;
+	position: relative;
+	width: 300px;
+	border: solid #fff 2px;
+	text-align: center;
+}
+
+#magic{
+	display: none;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.op{
+	color: #ff2c14;
+}
+
+.voice{
+	color: #f7ff1a;
+}
+
+.no-voice{
+	color: #f6ffcc;
+}
+
+button::-moz-focus-inner {
+  border: 0; }
+
+button.minimal {
+  background: #e3e3e3;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+  box-shadow: inset 0 0 1px 1px #f6f6f6;
+  color: #333;
+  font: bold 12px/1 "helvetica neue", helvetica, arial, sans-serif;
+  padding: 8px 0 9px;
+  text-align: center;
+  text-shadow: 0 1px 0 #fff;
+  width: 150px; }
+  button.minimal:hover {
+    background: #d9d9d9;
+    -webkit-box-shadow: inset 0 0 1px 1px #eaeaea;
+    box-shadow: inset 0 0 1px 1px #eaeaea;
+    color: #222;
+    cursor: pointer; }
+  button.minimal:active {
+    background: #d0d0d0;
+    -webkit-box-shadow: inset 0 0 1px 1px #e3e3e3;
+    box-shadow: inset 0 0 1px 1px #e3e3e3;
+    color: #000; }
+
+button.menu {
+  background: #401A00;
+  color: #D36743;
+  font: bold 12px;
+  font-family: 'Droid Sans', sans-serif;
+  padding: 10px 0 12px;
+  text-align: center;
+  width: 200px;
+  height: 40px;
+  border: 0px solid #bbb;
+  -moz-transition:-moz-transform 0.21s ease-in; 
+  -webkit-transition:-webkit-transform 0.21s ease-in; 
+  -o-transition:-o-transform 0.21s ease-in;
+   }
+  button.menu:hover {
+    background: #7F3400;
+    cursor: pointer;
+	text-shadow: 0px 0px 13px rgba(192, 194, 194, 0.5);
+    -webkit-transform: scale(1.1); 
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+     }
+  button.menu:active {
+    background: #964412;
+    color: #BF4F00; }
+
+.icon { 
+  opacity: 1;
+} 
+
+.icon:hover { 
+  opacity: 0.7;
+}
+
+

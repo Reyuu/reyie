@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html class="tuturu">
+<link rel="stylesheet" href="/styles/main.css" type="text/css">
+<title>TUTURU</title>
+<body>
+<div class="tuturu2">
+<audio loop id="ttt2">
+<source src="http://a.pomf.se/cdiprh.mp3" type="audio/mp3"/>
+<source src="http://a.pomf.se/axnnqk.ogg" type="audio/ogg"/>
+</audio>
+<audio id="ttt">
+<source src="http://a.pomf.se/cdiprh.mp3" type="audio/mp3"/>
+<source src="http://a.pomf.se/axnnqk.ogg" type="audio/ogg"/>
+</audio>
+<audio id="t_imperial_march"><source src="http://a.pomf.se/jczwmr.mp3"/></audio>
+<audio id="t_muthafucka"><source src="http://a.pomf.se/yhncim.mp3"/></audio>
+<audio id="t_tutturies"><source src="http://waa.ai/vznt"/></audio>
+
+<audio id="t_blue_stork"><source src="http://waa.ai/vzGX"/></audio>
+<audio id="t_drop_that"><source src="http://a.pomf.se/qyxotb.mp3"/></audio>
+<audio id="t_every_day"><source src="http://a.pomf.se/uvvzrd.mp3"/></audio>
+<audio id="t_happy"><source src="http://a.pomf.se/ufavvj.mp3"/></audio>
+<audio id="t_its_teim"><source src="http://a.pomf.se/qvveyw.mp3"/></audio>
+<audio id="t_mashup"><source src="http://waa.ai/vzGa"/></audio>
+
+<!-- While one playing, do not play another thing -->
+<script>
+var curPlaying = "";
+var ttt2 = document.getElementById('ttt2');
+var ttt = document.getElementById('ttt');
+
+var t_imperial_march = document.getElementById('t_imperial_march');
+var t_muthafucka = document.getElementById('t_muthafucka');
+var t_tutturies = document.getElementById('t_tutturies');
+var t = [t_imperial_march, t_muthafucka, t_tutturies, t_blue_stork, t_drop_that, t_every_day, t_happy, t_its_teim, t_mashup];
+
+curPlaying = ttt2
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function checkState(x){
+	if (curPlaying == x){
+		curPlaying.play();
+	}
+	else{
+		curPlaying.pause();
+		curPlaying.currentTime = 0;
+		curPlaying = x;
+		curPlaying.play();
+	}
+	
+}
+function getMeRandomTuturu(){
+	checkState(t[getRandomInt(0, 8)]);
+}
+</script>
+<button onclick="checkState(ttt)" class="minimal">&nbsp;ONE TUTURU&nbsp;</button><br>
+<button onclick="checkState(ttt2)" class="minimal">&nbsp;LOOP TUTURU&nbsp;</button><br>
+<button onclick="getMeRandomTuturu()" class="minimal">&nbsp;RANDOM TUTURU&nbsp;</button><br>
+<button onclick="curPlaying.pause();curPlaying.currentTime=0;" class="minimal">&nbsp;STOP TUTURU&nbsp;</button>
+<button onclick="location.href='/'" class="minimal">Go to index</button>
+</div>
+<a href="https://www.youtube.com/watch?v=8g6TKvzAOks">
+<!-- http://rs1img.memecdn.com/mayushii-desu_o_3385151.jpg -->
+<img src="http://tehurn.com/media/Mayu.png" class="mayushii">
+</a>
+</body>
+</html>

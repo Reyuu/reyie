@@ -1,0 +1,15 @@
+html{
+	background-image: url("http://www.touhouradio.com/bg/new-12-22-104.jpg");
+	background-position: center center;
+}
+
+div{
+	font-family: Veranda, Arial;
+	font-size: 14px;
+	opacity: 0.95;
+	filter: alpha(opacity=95);
+}
+
+footer{
+	font-size: 8px;
+}

@@ -1,0 +1,9 @@
+Options FollowSymLinks
+order allow,deny
+allow from all
+deny from 162.252.57.200
+deny from 178.254.29.196
+deny from 142.54.174.178
+RewriteEngine On
+ErrorDocument 404 /error_pages/404.html
+ErrorDocument 403 /error_pages/403.html
