@@ -5,6 +5,11 @@ deny from 162.252.57.200
 deny from 178.254.29.196
 deny from 142.54.174.178
 RewriteEngine On
+
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^reyie\.cf$ [NC]
+RewriteRule ^(.*)$ http://reyie.com [R=301,L]
+
 RewriteRule ^radio radio/index.php
 RewriteRule ^radio/(.*)$ radio/$1 [L]
 RewriteRule ^flashes$ flashes.php [L]
